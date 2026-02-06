@@ -6,7 +6,7 @@ This implementation plan breaks down the cartographic displacement system into i
 
 ## Tasks
 
-- [ ] 1. Set up project structure and core data models
+- [x] 1. Set up project structure and core data models
   - Create Python package structure with `src/cartographic_displacement/` directory
   - Implement core data models: `Point`, `Vector2D`, `LineSegment`, `IntersectionPoint`, `Conflict`, `DisplacementConfig`
   - Set up testing framework (pytest) and property-based testing library (Hypothesis)
@@ -21,7 +21,7 @@ This implementation plan breaks down the cartographic displacement system into i
   - Test that LineSegment length is always non-negative
 
 - [ ] 2. Implement WKT Parser component
-  - [ ] 2.1 Create `WKTParser` class with `parse_file()` and `parse_linestring()` methods
+  - [-] 2.1 Create `WKTParser` class with `parse_file()` and `parse_linestring()` methods
     - Use regex to extract LINESTRING geometries from file
     - Leverage Shapely's `wkt.loads()` for parsing
     - Convert Shapely LineString to internal `LineSegment` representation
