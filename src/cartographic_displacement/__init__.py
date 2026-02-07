@@ -14,6 +14,9 @@ from .models import (
     DisplacementConfig,
 )
 from .parser import WKTParser, WKTParseError
+from .pretty_printer import WKTPrettyPrinter
+from .network_graph import NetworkGraph
+from .conflict_detector import ConflictDetector
 
 __version__ = "0.1.0"
 
@@ -26,4 +29,7 @@ __all__ = [
     "DisplacementConfig",
     "WKTParser",
     "WKTParseError",
+    "WKTPrettyPrinter",
+    "NetworkGraph",
+    "ConflictDetector",
 ]

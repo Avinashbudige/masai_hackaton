@@ -2,6 +2,7 @@ README.md
 setup.py
 src/cartographic_displacement/__init__.py
 src/cartographic_displacement/models.py
+src/cartographic_displacement/parser.py
 src/cartographic_displacement.egg-info/PKG-INFO
 src/cartographic_displacement.egg-info/SOURCES.txt
 src/cartographic_displacement.egg-info/dependency_links.txt

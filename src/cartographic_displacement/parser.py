@@ -10,7 +10,7 @@ import re
 from typing import List, Optional
 from shapely import wkt
 from shapely.geometry import LineString
-from shapely.errors import WKTReadingError
+from shapely.errors import ShapelyError
 
 from .models import LineSegment, Point
 
@@ -186,6 +186,20 @@ class WKTParser:
                     wkt_string=wkt_string
                 )
             
+            # Validate coordinates for NaN and infinity
+            import math
+            for i, (x, y) in enumerate(geom.coords):
+                if math.isnan(x) or math.isnan(y):
+                    raise WKTParseError(
+                        f"Invalid coordinate at point {i}: NaN values are not allowed",
+                        wkt_string=wkt_string
+                    )
+                if math.isinf(x) or math.isinf(y):
+                    raise WKTParseError(
+                        f"Invalid coordinate at point {i}: infinity values are not allowed",
+                        wkt_string=wkt_string
+                    )
+            
             # Convert Shapely LineString to internal representation
             coordinates = [Point(x, y) for x, y in geom.coords]
             
@@ -198,10 +212,20 @@ class WKTParser:
             
             return segment
             
-        except WKTReadingError as e:
+        except WKTParseError:
+            # Re-raise our own errors
+            raise
+        except ShapelyError as e:
             # Shapely couldn't parse the WKT
+            error_msg = str(e)
+            # Check if it's the "point array must contain 0 or >1 elements" error
+            if "point array must contain 0 or >1 elements" in error_msg:
+                raise WKTParseError(
+                    "LINESTRING must have at least 2 points, got 1",
+                    wkt_string=wkt_string
+                )
             raise WKTParseError(
-                f"Invalid WKT syntax: {str(e)}",
+                f"Invalid WKT syntax: {error_msg}",
                 wkt_string=wkt_string
             )
         except ValueError as e:
