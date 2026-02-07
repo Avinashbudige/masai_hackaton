@@ -211,7 +211,3 @@ Given more time, the next priorities would be:
 2. Topology validation (Task 9)
 3. CLI interface (Task 12)
 4. Visualization (Task 11)
-
-## Contact
-
-For questions about this implementation, please refer to the design documents in `.kiro/specs/cartographic-displacement/`.
